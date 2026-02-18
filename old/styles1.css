@@ -268,61 +268,35 @@ button { border: none; background: none; font: inherit; color: inherit; }
 }
 
 /* =====================
-   BORÓKA NIGHTCLUB MODE
-===================== */
-
+   ROLLING BOTTLE (Scroll-driven)
+   ===================== */
 .rolling-bottle-fixed {
     position: fixed;
-    right: 6%;
-    top: 24%;
-    width: 200px;
-    z-index: 80;
+    bottom: 1.5rem;
+    z-index: 99;
+    width: 72px; height: 72px;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.6s var(--ease);
+    filter: drop-shadow(0 6px 20px rgba(30,144,208,0.5));
 }
-
-.rolling-bottle-fixed.visible {
-    opacity: 1;
-}
+.rolling-bottle-fixed.visible { opacity: 0.9; }
 
 .rb-img {
-    width: 100%;
-    will-change: transform, filter;
-    transform-style: preserve-3d;
-    filter:
-        drop-shadow(0 30px 70px rgba(0,0,0,0.6))
-        drop-shadow(0 0 25px rgba(30,144,208,0.4));
-    transition: filter 0.3s ease;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid rgba(94,206,245,0.3);
+    box-shadow: 0 0 16px rgba(30,144,208,0.3);
+    will-change: transform;
 }
 
-/* Subtle neon breathing */
-@keyframes neonPulse {
-    0% {
-        filter:
-            drop-shadow(0 30px 70px rgba(0,0,0,0.6))
-            drop-shadow(0 0 20px rgba(30,144,208,0.4));
-    }
-    100% {
-        filter:
-            drop-shadow(0 40px 90px rgba(0,0,0,0.8))
-            drop-shadow(0 0 35px rgba(30,144,208,0.8));
-    }
-}
-
-.rolling-bottle-fixed.visible .rb-img {
-    animation: neonPulse 2.5s ease-in-out infinite alternate;
-}
-
-/* Mobile refined */
 @media (max-width: 768px) {
     .rolling-bottle-fixed {
-        width: 130px;
-        right: 4%;
-        top: 30%;
+        width: 52px; height: 52px;
+        bottom: 1rem;
     }
 }
-
 
 /* =====================
    NAVBAR

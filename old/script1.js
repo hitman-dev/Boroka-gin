@@ -220,77 +220,31 @@
 
     document.querySelectorAll('.taste-fill').forEach(f => tasteObserver.observe(f));
 
-    // /* ---------- ROLLING BOTTLE (Scroll-driven) ---------- */
-    // const rollingBottle = document.getElementById('rollingBottleFixed');
-    // const docHeight = () => document.documentElement.scrollHeight - window.innerHeight;
+    /* ---------- ROLLING BOTTLE (Scroll-driven) ---------- */
+    const rollingBottle = document.getElementById('rollingBottleFixed');
+    const docHeight = () => document.documentElement.scrollHeight - window.innerHeight;
 
-    // function updateRollingBottle(sy) {
-    //     if (!rollingBottle) return;
-    //     const total = docHeight();
-    //     if (total <= 0) return;
+    function updateRollingBottle(sy) {
+        if (!rollingBottle) return;
+        const total = docHeight();
+        if (total <= 0) return;
 
-    //     const progress = sy / total; // 0 → 1
-    //     const show = sy > 300 && progress < 0.95;
-    //     rollingBottle.classList.toggle('visible', show);
+        const progress = sy / total; // 0 → 1
+        const show = sy > 300 && progress < 0.95;
+        rollingBottle.classList.toggle('visible', show);
 
-    //     if (show) {
-    //         const viewW = window.innerWidth;
-    //         const bottleW = rollingBottle.offsetWidth;
-    //         // Position: roll from left to right across the viewport
-    //         const x = progress * (viewW - bottleW);
-    //         // Rotate based on scroll — 6 full rotations for a nice rolling feel
-    //         const rotation = progress * 360 * 6;
-    //         rollingBottle.style.left = x + 'px';
-    //         const rbImg = document.getElementById('rbImg');
-    //         if (rbImg) rbImg.style.transform = `rotate(${rotation}deg)`;
-    //     }
-    // }
-
-    /* ========================================
-    PREMIUM SCROLL DRIVEN ROLLING BOTTLE
-    ======================================== */
-
-    const bottle = document.getElementById("rbImg");
-    const bottleContainer = document.getElementById("rollingBottleFixed");
-
-    let currentRotation = 0;
-    let targetRotation = 0;
-
-    window.addEventListener("scroll", () => {
-
-        const scrollY = window.scrollY;
-        const heroHeight = document.querySelector(".hero").offsetHeight;
-        const footer = document.querySelector(".footer");
-        const footerTop = footer.offsetTop;
-
-        // Show only after hero
-        if (scrollY > heroHeight * 0.6 && scrollY < footerTop - 400) {
-            bottleContainer.classList.add("visible");
-        } else {
-            bottleContainer.classList.remove("visible");
+        if (show) {
+            const viewW = window.innerWidth;
+            const bottleW = rollingBottle.offsetWidth;
+            // Position: roll from left to right across the viewport
+            const x = progress * (viewW - bottleW);
+            // Rotate based on scroll — 6 full rotations for a nice rolling feel
+            const rotation = progress * 360 * 6;
+            rollingBottle.style.left = x + 'px';
+            const rbImg = document.getElementById('rbImg');
+            if (rbImg) rbImg.style.transform = `rotate(${rotation}deg)`;
         }
-
-        targetRotation = scrollY * 0.22;
-    });
-
-    function animateBottle() {
-
-        currentRotation += (targetRotation - currentRotation) * 0.08;
-
-        const floatOffset = Math.sin(currentRotation * 0.015) * 12;
-
-        bottle.style.transform = `
-            rotate(${currentRotation}deg)
-            translateY(${floatOffset}px)
-            rotateY(${Math.sin(currentRotation * 0.01) * 10}deg)
-        `;
-
-        requestAnimationFrame(animateBottle);
     }
-
-    animateBottle();
-
-
 
     /* ---------- PARALLAX BACKGROUND ---------- */
     const parallaxBg = document.querySelector('.parallax-bg');
